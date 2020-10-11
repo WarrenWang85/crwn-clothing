@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import "./Header.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartDropdown from "../CartDropdown/CartDropdown";
+import { selectCartHidden } from "../../redux/cart/cartSelectors";
+import { selectCurrentUser } from "../../redux/user/userSelectors";
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../CartIcon/CartIcon";
 function Header({ currentUser, hidden }) {
@@ -20,6 +23,7 @@ function Header({ currentUser, hidden }) {
         <Link className="option" to="/shop">
           CONTACT
         </Link>
+
         {currentUser ? (
           <div className="option" onClick={() => auth.signOut()}>
             SIGN OUT
@@ -35,8 +39,9 @@ function Header({ currentUser, hidden }) {
     </div>
   );
 }
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+//createStructuredSelector will automatically pass top level state into each subsequent selector
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 export default connect(mapStateToProps)(Header);
