@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+
 import "./Header.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartDropdown from "../CartDropdown/CartDropdown";
@@ -9,6 +10,7 @@ import { selectCartHidden } from "../../redux/cart/cartSelectors";
 import { selectCurrentUser } from "../../redux/user/userSelectors";
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../CartIcon/CartIcon";
+
 function Header({ currentUser, hidden }) {
   // console.log(currentUser);
   return (

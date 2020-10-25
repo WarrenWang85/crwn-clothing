@@ -7,10 +7,15 @@ import ShopPage from "./pages/ShopPage/ShopPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import Header from "./components/Header/Header";
 import SigninAndSignup from "./pages/SinginAndSignup/SigninAndSignup";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  //addCollectionAndDocuments,
+} from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/userAction";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/userSelectors";
+// import { selectCollectionsForPreview } from "./redux/shop/shopSeletors";
 class App extends React.Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
@@ -23,12 +28,16 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
       // this.setState({ currentUser: user });
       // console.log(this.state.currentUser);
     });
   }
   componentWillUnmount() {
+    //this line will unsubscribe the observable
     this.unsubscribeFromAuth();
   }
   render() {
@@ -53,6 +62,7 @@ class App extends React.Component {
 }
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionsForPreview,
 });
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
