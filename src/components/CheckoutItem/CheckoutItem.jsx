@@ -4,7 +4,7 @@ import {
   clearItemFromCart,
   addItem,
   removeItem,
-} from "../../redux/cart/cartAction";
+} from "../../redux/cart/cartActions";
 import "./CheckoutItem.scss";
 function CheckoutItem({ cartItem, clearItem, addItem, removeItem }) {
   const { name, imageUrl, price, quantity } = cartItem;
